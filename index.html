@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StillMatters - A private, positive-only logging tool for helpers. Track small wins, prevent burnout. 100% private, no tracking.">
+    <meta name="keywords" content="social work, burnout prevention, helper app, private journal, emotional wellness, self-care">
+    <title>StillMatters - Every Small Moment Matters</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+            color: #5A6B63;
+            line-height: 1.6;
+            background: #F5F3F0;
+        }
+
+        /* Header / Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 500;
+            color: #9DB4AB;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #5A6B63;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #9DB4AB;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 5% 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: #5A6B63;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #7A8B83;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: #9DB4AB;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        /* App Store Buttons */
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .app-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            background: #5A6B63;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(90, 107, 99, 0.2);
+        }
+
+        .app-btn:hover {
+            background: #9DB4AB;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(90, 107, 99, 0.3);
+        }
+
+        .app-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+		/* Video Container */
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-caption {
+            text-align: center;
+            margin-top: 1rem;
+            color: #7A8B83;
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        /* Phone Mockup */
+        .phone-preview {
+            max-width: 400px;
+            margin: 0 auto 4rem;
+            perspective: 1000px;
+        }
+
+        .phone-frame {
+            width: 100%;
+            background: #2c2c2c;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .phone-screen {
+            background: #F5F3F0;
+            border-radius: 30px;
+            overflow: hidden;
+            aspect-ratio: 9/19.5;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 80px 5%;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #5A6B63;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .features-intro {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7A8B83;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            background: #F5F3F0;
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #5A6B63;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .feature-card p {
+            color: #7A8B83;
+            font-size: 1rem;
+        }
+
+        /* Privacy Section */
+        .privacy-section {
+            background: linear-gradient(135deg, #9DB4AB 0%, #B5C9BE 100%);
+            padding: 80px 5%;
+            color: white;
+        }
+
+        .privacy-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .privacy-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .privacy-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .privacy-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .privacy-point {
+            background: rgba(255,255,255,0.15);
+            padding: 1.5rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .privacy-point h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* For Whom Section */
+        .for-whom {
+            padding: 80px 5%;
+            background: #F5F3F0;
+        }
+
+        .for-whom-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .for-whom h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #5A6B63;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .personas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .persona {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 4px solid #9DB4AB;
+            transition: all 0.3s;
+        }
+
+        .persona:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .persona h3 {
+            color: #5A6B63;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .persona p {
+            color: #7A8B83;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: white;
+            padding: 80px 5%;
+        }
+
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #5A6B63;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .testimonial {
+            background: #F5F3F0;
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #5A6B63;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            color: #9DB4AB;
+            font-weight: 500;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #D4A59A 0%, #E8C4A6 100%);
+            padding: 80px 5%;
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            background: #5A6B63;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .features h2, .privacy-section h2, .for-whom h2, .testimonials h2, .cta h2 {
+                font-size: 2rem;
+            }
+        }
+		
+		.logo {
+			display: flex;
+			align-items: center;
+			text-decoration: none;
+		}
+
+		.logo-icon {
+			width: 50px;      /* adjust size */
+			height: 50px;
+			margin-right: 8px;
+			object-fit: contain;
+		}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+				<img src="images/stillmatters-icon.png" alt="StillMatters logo" class="logo-icon">
+				StillMatters
+			</a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Every Small Moment<br>Matters</h1>
+        <p class="subtitle">A private, positive-only logging tool for helpers</p>
+        <p class="tagline">You make a difference, even when it's hard to see</p>
+
+        <div class="app-buttons">
+            <a href="#" class="app-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                </svg>
+                Download on App Store
+            </a>
+            <a href="#" class="app-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                </svg>
+                Get it on Google Play
+            </a>
+        </div>
+
+        <!-- Phone Preview -->
+        <div class="phone-preview">
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <svg viewBox="0 0 375 812" style="width: 100%; height: 100%;">
+                        <rect width="375" height="812" fill="#F5F3F0"/>
+                        <text x="187.5" y="320" text-anchor="middle" font-size="32" fill="#5A6B63" font-family="Arial, sans-serif" font-weight="300">
+                            <tspan x="187.5" dy="0">Every small moment</tspan>
+                            <tspan x="187.5" dy="45">matters</tspan>
+                        </text>
+                        <text x="187.5" y="420" text-anchor="middle" font-size="16" fill="#7A8B83" font-family="Arial, sans-serif" font-style="italic">
+                            <tspan x="187.5" dy="0">You make a difference,</tspan>
+                            <tspan x="187.5" dy="24">even when it's hard to see</tspan>
+                        </text>
+                        <rect x="80" y="500" width="215" height="50" rx="25" fill="#9DB4AB"/>
+                        <text x="187.5" y="530" text-anchor="middle" font-size="18" fill="white" font-family="Arial, sans-serif" font-weight="500">+ Small Moment</text>
+                        <text x="187.5" y="720" text-anchor="middle" font-size="14" fill="#9DB4AB" font-family="Arial, sans-serif">🌿 Private. Safe. Yours.</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+		
+		<!-- Video Preview -->
+        <div class="video-container">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube-nocookie.com/embed/NjBw6O42XQc" 
+                    title="StillMatters App Demo"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="video-caption">Watch how StillMatters helps you see your impact (60 seconds)</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <h2>Designed for Emotional Safety</h2>
+            <p class="features-intro">StillMatters isn't another productivity app. It's emotional sustainability software for helpers who rarely see their long-term impact.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💚</div>
+                    <h3>Quick Logging</h3>
+                    <p>Tap an emoji category, choose a color, add an optional note. Takes 10 seconds, not 10 minutes.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🫁</div>
+                    <h3>Breathing Exercise</h3>
+                    <p>3 slow, guided breaths after each entry. Supporting your nervous system is part of self-care.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Weekly Summaries</h3>
+                    <p>Gentle reflections that show your impact without comparison or judgment.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Calming Design</h3>
+                    <p>Soft colors, gentle shapes, affirming language. No harsh alerts, no pressure, no guilt.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🚨</div>
+                    <h3>Emergency Erase</h3>
+                    <p>Instantly delete all entries. No confirmation screens. Critical for workers in sensitive situations.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>No Streaks, No Shame</h3>
+                    <p>No missed day reminders. No productivity scores. No gamification of your emotional labor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <section class="privacy-section" id="privacy">
+        <div class="privacy-container">
+            <h2>🔒 Your Privacy is Sacred</h2>
+            <p>We believe emotional safety requires data safety. That's why StillMatters collects absolutely nothing.</p>
+
+            <div class="privacy-points">
+                <div class="privacy-point">
+                    <h4>❌ No Accounts</h4>
+                    <p>No sign-up, no login, no email required</p>
+                </div>
+                <div class="privacy-point">
+                    <h4>❌ No Cloud Storage</h4>
+                    <p>Everything stays on your device only</p>
+                </div>
+                <div class="privacy-point">
+                    <h4>❌ No Tracking</h4>
+                    <p>No analytics, no data collection, period</p>
+                </div>
+                <div class="privacy-point">
+                    <h4>✅ Your Data</h4>
+                    <p>You own it, you control it, you delete it</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Whom Section -->
+    <section class="for-whom">
+        <div class="for-whom-container">
+            <h2>Who Is This For?</h2>
+            
+            <div class="personas">
+                <div class="persona">
+                    <h3>🏥 Social Workers</h3>
+                    <p>Track your daily impacts without violating confidentiality. See the seeds you plant, even when you don't see them grow.</p>
+                </div>
+
+                <div class="persona">
+                    <h3>🤝 Volunteers</h3>
+                    <p>Recognize your contributions matter. Record moments of connection that keep you coming back.</p>
+                </div>
+
+                <div class="persona">
+                    <h3>⚕️ Healthcare Workers</h3>
+                    <p>Acknowledge the emotional labor of caregiving. Prevent burnout by seeing your accumulated compassion.</p>
+                </div>
+
+                <div class="persona">
+                    <h3>📞 Crisis Responders</h3>
+                    <p>Decompress after difficult calls. Document wins safely with emergency erase for sensitive situations.</p>
+                </div>
+
+                <div class="persona">
+                    <h3>💬 Therapists & Counselors</h3>
+                    <p>Reflect on your growth moments. Separate your personal wins from client work while maintaining boundaries.</p>
+                </div>
+
+                <div class="persona">
+                    <h3>🌍 Nonprofit Workers</h3>
+                    <p>Stay motivated through long-term projects. See progress when systemic change takes time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <h2>What Helpers Are Saying</h2>
+
+            <div class="testimonial">
+                <p class="testimonial-quote">"As a social worker, I rarely see the long-term outcomes of my work. StillMatters helps me recognize the small moments that actually do matter. It's become part of my self-care routine."</p>
+                <p class="testimonial-author">— Social Worker</p>
+            </div>
+
+            <div class="testimonial">
+                <p class="testimonial-quote">"The breathing exercise after logging is genius. It helps me transition between difficult cases and gives me a moment to process before moving on."</p>
+                <p class="testimonial-author">— Crisis Counselor</p>
+            </div>
+
+            <div class="testimonial">
+                <p class="testimonial-quote">"I love that it's completely private. I can reflect on my work without worrying about confidentiality or data breaches. The emergency erase gives me peace of mind."</p>
+                <p class="testimonial-author">— Child Protection Worker</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Start Seeing Your Impact Today</h2>
+        <p>Download StillMatters and recognize that every small moment matters</p>
+        
+        <div class="app-buttons">
+            <a href="#" class="app-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                </svg>
+                App Store
+            </a>
+            <a href="#" class="app-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                </svg>
+                Google Play
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>StillMatters</h3>
+                <p>Emotional sustainability software for helpers everywhere.</p>
+                <p style="margin-top: 1rem;">🌿 Every small moment matters</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="license.html">License</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:support@stillmatters.app">support@stillmatters.app</a></li>
+                    <li><a href="mailto:privacy@stillmatters.app">privacy@stillmatters.app</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 StillMatters. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">Made with 💚 for helpers everywhere</p>
+        </div>
+    </footer>
+</body>
+</html>
